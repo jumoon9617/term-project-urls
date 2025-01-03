@@ -1,40 +1,41 @@
-# Welcome to Remix!
-
+# Welcome to Term Project!
+↓Remix document
 - 📖 [Remix docs](https://remix.run/docs)
 
-## Development
+## 開発環境
 
-Run the dev server:
+- Node v20.18.1
+- Prisma v6.1.0
+- Remix v2.15.2
+- Postgresql(docker-composeに記載アリ)
+
+## dev環境プレビュー
+
+devサーバーの起動(port=3000)
 
 ```shellscript
 npm run dev
 ```
 
-## Deployment
+## docker操作方法
 
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
+コンテナ立ち上げ
 
 ```sh
-npm start
+docker-compose up -d
 ```
 
-Now you'll need to pick a host to deploy it to.
+コンテナ停止
 
-### DIY
+```sh
+docker stop term-postgres
+```
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
+コンテナ再起動
 
-Make sure to deploy the output of `npm run build`
+```sh
+docker start term-postgres
+```
 
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+## その他
+- わからないことがあればJumaまで
