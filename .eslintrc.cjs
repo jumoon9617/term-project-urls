@@ -22,7 +22,10 @@ module.exports = {
   ignorePatterns: ["!**/.server", "!**/.client"],
 
   // Base config
-  extends: ["eslint:recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+  ],
 
   overrides: [
     // React
@@ -34,7 +37,11 @@ module.exports = {
         "plugin:react/jsx-runtime",
         "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
+        "plugin:prettier/recommended",
       ],
+      rules:{
+        "prettier/prettier": "error",
+      },
       settings: {
         react: {
           version: "detect",
@@ -53,7 +60,7 @@ module.exports = {
     // Typescript
     {
       files: ["**/*.{ts,tsx}"],
-      plugins: ["@typescript-eslint", "import"],
+      plugins: ["@typescript-eslint", "import", "prettier"],
       parser: "@typescript-eslint/parser",
       settings: {
         "import/internal-regex": "^~/",
@@ -70,7 +77,35 @@ module.exports = {
         "plugin:@typescript-eslint/recommended",
         "plugin:import/recommended",
         "plugin:import/typescript",
+        "plugin:prettier/recommended",
       ],
+      rules: {
+        "prettier/prettier": "error",
+        "import/order": [
+          "error",
+          {
+            "groups": [
+              ["builtin", "external"],
+              "internal",
+              ["parent", "sibling"],
+              "index",
+            ],
+            "newlines-between": "always",
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": true,
+            },
+          },
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "vars": "all",
+            "args": "after-used",
+            "ignoreRestSiblings": true,
+          },
+        ],
+      },
     },
 
     // Node

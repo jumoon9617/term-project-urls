@@ -1,40 +1,51 @@
-# Welcome to Remix!
-
+# Welcome to Term Project!
+↓Remix document
 - 📖 [Remix docs](https://remix.run/docs)
 
-## Development
+## 開発環境
 
-Run the dev server:
+<img src="https://img.shields.io/badge/-Node.js-339933.svg?logo=node.js&style=for-the-badge">
+<img src="https://img.shields.io/badge/-react-ffffff.svg?logo=react&style=for-the-badge">
+<img src="https://img.shields.io/badge/-Remix-000000.svg?logo=remix&style=for-the-badge">
+<img src="https://img.shields.io/badge/-Docker-1488C6.svg?logo=docker&style=for-the-badge">
+<img src="https://img.shields.io/badge/-Postgresql-336791.svg?logo=postgresql&style=for-the-badge">
+
+
+## ルーティング
+
+| ルーティング | 詳細 |
+| -------------------- | ------------------ |
+| /                    | ホーム画面          |
+| /urls                | URLの一覧画面       |
+| /urls/urlId          | URLの詳細画面       |
+
+## dev環境プレビュー
+
+devサーバーの起動(port=3000)
 
 ```shellscript
 npm run dev
 ```
 
-## Deployment
+## docker操作方法
 
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
+コンテナ立ち上げ
 
 ```sh
-npm start
+docker-compose up -d
 ```
 
-Now you'll need to pick a host to deploy it to.
+コンテナ停止
 
-### DIY
+```sh
+docker stop term-postgres
+```
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
+コンテナ再起動
 
-Make sure to deploy the output of `npm run build`
+```sh
+docker start term-postgres
+```
 
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+## その他
+- わからないことがあればJumaまで
