@@ -2,8 +2,6 @@ import { PrismaClient, Messages, Urls, UrlClicked } from '@prisma/client'
 import type { MetaFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 
-import styles from './route.module.css'
-
 const prisma = new PrismaClient()
 
 export const mete: MetaFunction = () => {
@@ -24,7 +22,7 @@ export default function Index() {
   const { messages, urls, urlClicked } = useLoaderData<typeof loader>()
   return (
     <div>
-      <div className={styles.title}>Welcome to Term Project!</div>
+      <div>Welcome to Term Project!</div>
       <div>This is urls details page</div>
       <hr />
     </div>
