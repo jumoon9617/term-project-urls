@@ -58,6 +58,11 @@ export async function createUrl(url: string, message_id: number){
   return prisma.urls.create({ data: { url: url , message_id: message_id} });
 }
 
+export async function getUrlsLate(num: number){
+  const prisma = getPrisma();
+  return prisma.urls.findMany({ take: num, orderBy: { extracted_at: 'desc' } });
+}
+
 // UrlClicked
 export async function getUrlClicked() {
   const prisma = getPrisma()
