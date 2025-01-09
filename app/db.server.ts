@@ -63,6 +63,11 @@ export async function getUrlsLate(num: number){
   return prisma.urls.findMany({ take: num, orderBy: { extracted_at: 'desc' } });
 }
 
+export async function getUrlsByPageNum(pageNum: number){
+  const prisma = getPrisma();
+  return prisma.urls.findMany({ skip: (pageNum - 1) * 10, take: 10, orderBy: { extracted_at: 'desc' } });
+}
+
 // UrlClicked
 export async function getUrlClicked() {
   const prisma = getPrisma()
