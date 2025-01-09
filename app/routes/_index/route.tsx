@@ -1,15 +1,14 @@
-import { PrismaClient, Messages, Urls, UrlClicked } from '@prisma/client'
 import type { MetaFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 
-import { getMessages, getUrlsLate } from '~/db.server'
+import { getUrlsLate } from '~/db.server'
 
 
 import Button from '~/components/ButtonComponent/Button'
 import Fukidashi from '~/components/FukidashiComponent/Fukidashi'
 
 
-export const mete: MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return [
     { title: 'Remix Start' },
     { name: 'description', content: 'Welcome to Remix!' },
@@ -17,14 +16,17 @@ export const mete: MetaFunction = () => {
 }
 
 export const loader = async () => {
-  const messages = await getMessages()
   const urlsLate = await getUrlsLate(3)
 
-  return { messages, urlsLate}
+  return { urlsLate }
+}
+
+const handleFukidashiClicked = (id: number) => {
+  window.location.href = `/urls/details/${id}`
 }
 
 const handleLargeClicked = () => {
-  window.location.href = '/urls'
+  window.location.href = '/urls/1'
 }
 
 function formatDate(date: Date): string {
@@ -35,7 +37,7 @@ function formatDate(date: Date): string {
 }
 
 export default function Index() {
-  const { messages, urlsLate } = useLoaderData<typeof loader>()
+  const { urlsLate } = useLoaderData<typeof loader>()
   return (
     <div className="min-w-full">
       <div className='bg-light-gray h-[700px]'>
@@ -49,24 +51,28 @@ export default function Index() {
           このボタンでURL一覧見れます
         </div>
         <div className='flex justify-center mt-8'>
-          <Button text="URL一覧はこちら！" size="large"  onClick={handleLargeClicked} />
+          <Button text="URL一覧はこちら！" size="large" onClick={handleLargeClicked} />
         </div>
         <div className='flex justify-center mt-24 mx-8 text-white'>この下にも最近の投稿とかあるのでぜひ見てほしい、おねがいしますん</div>
       </div>
       <div className='bg-golden-yellow h-[700px]'>
         <div className='flex justify-center pt-12 text-2xl font-bold'>～最近の投稿～</div>
-        <div className='flex justify-center mt-8'>
-          <Fukidashi title={urlsLate[0].title} url={urlsLate[0].url} date={formatDate(urlsLate[0].extracted_at)} position="right" />
-        </div>
-        <div className='flex justify-center mt-8'>
-          <Fukidashi title={urlsLate[1].title} url={urlsLate[1].url} date={formatDate(urlsLate[1].extracted_at)} position="left" />
-        </div>
-        <div className='flex justify-center mt-8'>
-          <Fukidashi title={urlsLate[2].title} url={urlsLate[2].url} date={formatDate(urlsLate[2].extracted_at)} position="right" />
-        </div>
+        {urlsLate.map((url, index) => (
+          <div key={url.url_id} className='flex justify-center mt-8'>
+            <Fukidashi
+              title={url.title}
+              url={url.url}
+              date={formatDate(url.extracted_at)}
+              position={index % 2 === 0 ? 'right' : 'left'}
+              urlId={url.url_id}
+              onClick={handleFukidashiClicked}
+            />
+          </div>
+        ))}
       </div>
       <div className='bg-rust-red h-[700px]'>
-      <div className='flex justify-center pt-12 text-2xl font-bold'>～統計情報～</div>
+        <div className='flex justify-center pt-12 text-2xl font-bold'>～統計情報～</div>
+        <div className='flex justify-center mt-12 text-2xl font-bold'>あまりにも計画性のない進め方したせいで未実装ですドンマイです</div>
       </div>
     </div>
   )
