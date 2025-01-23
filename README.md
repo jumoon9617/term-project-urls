@@ -1,6 +1,9 @@
-# Welcome to Term Project!
-↓Remix document
-- 📖 [Remix docs](https://remix.run/docs)
+# ゆーあーるえるず！
+
+## 概要
+- このプロジェクトではSlack APIを使用して取得したURLを含んだメッセージを、URLとそれ以外の部分に分けて保存・一覧で見ることができるアプリケーションを制作しています！
+- ~~Slack APIの部分の開発URL~~←準備中
+- デプロイはRenderを使ってるのでちょっと起動ゆっくりです(お金ない)
 
 ## 開発環境
 
